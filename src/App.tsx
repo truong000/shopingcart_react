@@ -1,7 +1,10 @@
-import { Fragment, useEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
+import { Route, Routes } from 'react-router';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import { Product } from './containers/Product/Index';
 import { ctx } from './context';
+import { Home } from './pages/Home';
+import { ProductDetail } from './pages/ProductDetail';
 import { initialState, reducerFn } from './reducer';
 
 function App(): JSX.Element {
@@ -16,28 +19,26 @@ function App(): JSX.Element {
       })
   }, [])
 
-  console.log("State", state);
-
   return (
     <ctx.Provider value={state}>
       <div className="App">
-        <div className='TableList'>
-        {
-          state.products.length ? (
-            <Fragment>
-              {state.products.map(product => (
-                <Product 
-                  key={product.id}
-                  image={product.image}
-                  title={product.title}
-                />
-              ))}
-            </Fragment>
-          ) : (
-            <h2>Loading...</h2>
-          )
-        }
+        <div>
+          <ul>
+            <li><a className="active" href="#home">Home</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="Cart">Cart</a></li>
+          </ul>
         </div>
+        <main>
+          <BrowserRouter>
+            <Routes>
+              <Route path='/' element={<Home />} />
+              <Route path='products/:title' element={<ProductDetail />} />
+            </Routes>
+          </BrowserRouter>
+        </main>
       </div>
     </ctx.Provider>
   );

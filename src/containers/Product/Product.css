@@ -1,6 +1,7 @@
 .Product{
-    width: 200px;
-    height: 400px;
+    margin: 0 auto;
+    max-width: 340px;
+    width: 100%;
 }
 .Product__thumbnail{
     width: 100%;
@@ -8,8 +9,10 @@
 }
 .Product__image{
     width: 100%;
+    max-height: 450px;
     height: 300px;
 }
 .Product__title{
     max-height: 300px;
 }
+

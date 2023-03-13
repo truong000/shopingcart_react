@@ -1,10 +1,11 @@
 
-interface ProductInterface {
+export interface ProductInterface {
     id: string;
     name: string;
     price: number;
     image: string;
     title: string; 
+    description: string;
 }
 
 export interface StateInterface {
