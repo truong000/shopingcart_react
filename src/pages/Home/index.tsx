@@ -1,23 +1,18 @@
-import { Fragment, useContext } from "react"
+import { Fragment} from "react"
 import { Product } from "../../containers/Product"
-import { ctx } from "../../context"
-import { StateInterface } from "../../globalTypes"
+import { PageProps} from "../../globalTypes"
 
 
-
-const Home: React.FC = (): JSX.Element => {
-    const state = useContext(ctx) as StateInterface
-
-    console.log(state)
+const Home: React.FC<PageProps> = ({state, dispatch, ctx}): JSX.Element => {
 
     return (
         <Fragment>
             <section className='Home'>
                 <section className='Home__items'>
                     {
-                        state.products.length ? (
+                        state.filteredItems.length ? (
                             <Fragment>
-                                {state.products.map(product => (
+                                {state.filteredItems.map(product => (
                                     <Product key={product.id} image={product.image}
                                         title={product.title} />
                                 ))}

@@ -5,6 +5,7 @@ import "./Product.css";
 interface ProductProps {
     title: string;
     image: string;
+
 }
 
 const Product: React.FC<ProductProps> = ({ title, image }): JSX.Element => {
@@ -22,7 +23,6 @@ const Product: React.FC<ProductProps> = ({ title, image }): JSX.Element => {
                 </h2>
             </div>
         </div>
-
     )
 }
 
