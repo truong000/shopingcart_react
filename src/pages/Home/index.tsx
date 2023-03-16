@@ -9,6 +9,7 @@ const Home: React.FC<PageProps> = ({state, dispatch, ctx}): JSX.Element => {
         <Fragment>
             <section className='Home'>
                 <section className='Home__items'>
+
                     {
                         state.filteredItems.length ? (
                             <Fragment>

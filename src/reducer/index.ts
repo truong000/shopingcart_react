@@ -5,7 +5,7 @@ export const initialState = (): StateInterface => {
         products: [],
         filteredItems: [],
         shoppingCart: [],
-        categories: ["All items"],
+        categories: ["All product"],
         current: "/",
         history: "",
         searching: "",
@@ -82,7 +82,9 @@ export const reducer = (state: StateInterface, action: ActionInterface): StateIn
                 ...state,
                 shoppingCart: newShoppingCart
             }
-
+        case "FILTER_CATEGORY":
+            state.filteredItems = payload === "All items" ? state.products : state.products.filter(product => product.category === payload)
+            return{ ...state, filterAt: payload as string }
         default: return state
     }
 }

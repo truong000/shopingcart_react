@@ -8,6 +8,8 @@ import { StateInterface } from './globalTypes';
 import { Cart } from './pages/Cart';
 import { Home } from './pages/Home';
 import { ProductDetail } from './pages/ProductDetail';
+
+
 import { initialState, reducer } from './reducer';
 
 function App(): JSX.Element {
@@ -15,11 +17,11 @@ function App(): JSX.Element {
   const [state, dispatch] = useReducer(reducer, initialState())
 
   React.useEffect(() => {
-    try{
+    try {
       fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(data => dispatch({ type: "ADD_INITIAL_ITEMS", payload: data }))
-    }catch(err){
+        .then(res => res.json())
+        .then(data => dispatch({ type: "ADD_INITIAL_ITEMS", payload: data }))
+    } catch (err) {
       dispatch({ type: "ERROR" })
     }
   }, [])
@@ -31,33 +33,33 @@ function App(): JSX.Element {
       <div className="App">
         <main>
           <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/news">News</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/shopping-cart">Cart</Link></li>
-          </ul>
+            <ul>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/news">News</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
+              <li><Link to="/about">About</Link></li>
+              <li><Link to="/shopping-cart">Cart</Link></li>
+            </ul>
           </nav>
           <Routes>
             <Route path='/' element={
-              <Home 
+              <Home
                 dispatch={dispatch}
                 state={state as StateInterface}
-              />} 
+              />}
             />
             <Route path='products/:title' element={
-              <ProductDetail 
-                dispatch={dispatch} 
+              <ProductDetail
+                dispatch={dispatch}
                 state={state as StateInterface}
-              />} 
+              />}
             />
             <Route path='/shopping-cart' element={
-                <Cart 
-                  state={state as StateInterface}
-                  dispatch={dispatch} 
-                />
-            }/>
+              <Cart
+                state={state as StateInterface}
+                dispatch={dispatch}
+              />
+            } />
           </Routes>
         </main>
       </div>

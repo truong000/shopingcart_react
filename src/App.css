@@ -47,10 +47,6 @@ li a:hover {
 }
 
 
-@mixin buttonPrimary {
-  border: none;
-  background-color: transparent;
-}
 
 @import "./pages/Home/Home.css";
 @import "./pages/ProductDetail/ProductDetail.css"
