@@ -1,4 +1,4 @@
-import { StateInterface, ActionInterface, ProductInterface} from "../globalTypes";
+import { StateInterface, ActionInterface, ProductInterface, RoutesInterface, ChangeQuantityInterface } from "../globalTypes";
 
 export const initialState = (): StateInterface => {
     return {
@@ -27,29 +27,29 @@ export const reducer = (state: StateInterface, action: ActionInterface): StateIn
         return state.products.findIndex(item => item.id === payload)
     }
 
-    switch(type) {
+    switch (type) {
         case "ADD_INITIAL_ITEMS":
             (payload as ProductInterface[]).forEach((product: ProductInterface) => {
-              if(!state.categories.includes(product.category)){
-                state.categories.push(product.category)
-              }
+                if (!state.categories.includes(product.category)) {
+                    state.categories.push(product.category)
+                }
             })
             state.products = payload as ProductInterface[];
             state.filteredItems = state.products;
             return {
-              ...state,
-              loading: false
+                ...state,
+                loading: false
             }
         case "ADD_TO_CART":
             index = getIndex()
-            if(index >= 0){
+            if (index >= 0) {
                 newItem = state.products[index]
                 newItem.quantity = 1
                 newShoppingCart = [
                     ...state.shoppingCart,
                     newItem
                 ]
-            }else (
+            } else (
                 newShoppingCart = state.shoppingCart
             )
             state.products[index].added = true;
@@ -57,7 +57,33 @@ export const reducer = (state: StateInterface, action: ActionInterface): StateIn
                 ...state,
                 shoppingCart: newShoppingCart
             }
-        default: return state    
+        case "REMOVE_PRODUCT":
+            index = getIndex()
+            newShoppingCart = state.shoppingCart.filter(product => product.id !== payload)
+            state.products[index].added = false;
+            return {
+                ...state,
+                shoppingCart: newShoppingCart
+            }
+        case "MOVING":
+            state.current = (payload as RoutesInterface).current;
+            state.history = (payload as RoutesInterface).history
+            return {
+                ...state
+            }
+        case "CHANGE_QUANTITY":
+            index = state.shoppingCart.findIndex(
+                item => item.id === (payload as ChangeQuantityInterface).id
+            )
+            newShoppingCart = [...state.shoppingCart]
+            newShoppingCart[index].quantity = (payload as ChangeQuantityInterface).quantity
+
+            return {
+                ...state,
+                shoppingCart: newShoppingCart
+            }
+
+        default: return state
     }
 }
 

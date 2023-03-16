@@ -1,0 +1,27 @@
+.Cart{
+    position: relative;
+    min-height: 80vh;
+    padding-block: 10px;
+  }
+  
+  .Cart__products{
+    display: grid;
+    /* grid-template-columns: 90px 1fr; */
+    gap: 6px;
+    padding-block: 15px;
+  }
+  
+  .Cart__info{
+    margin-block: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Cart__total{
+    width: 100%;
+    border: 2px solid;
+    border-radius: 9px;
+    padding: 9px;
+    margin-bottom: 20px;
+  }

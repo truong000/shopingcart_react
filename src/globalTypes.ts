@@ -10,6 +10,11 @@ export interface RatingInterface {
     count: number;
 }
 
+export interface RoutesInterface {
+    current: string;
+    history: string;
+}
+
 export interface ProductInterface {
     id: number;
     category: string;
@@ -18,7 +23,7 @@ export interface ProductInterface {
     price: number;
     rating: RatingInterface;
     title: string;
-    quantity?: number;
+    quantity: number;
     added?: boolean
 }
 
@@ -44,6 +49,7 @@ export interface ActionInterface {
         | string
         | number
         | ChangeQuantityInterface
+        | RoutesInterface
 
 }
 

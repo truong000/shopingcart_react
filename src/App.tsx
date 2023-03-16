@@ -24,6 +24,8 @@ function App(): JSX.Element {
     }
   }, [])
 
+  console.log("state", state);
+
   return (
     <ctx.Provider value={state}>
       <div className="App">
@@ -42,17 +44,20 @@ function App(): JSX.Element {
               <Home 
                 dispatch={dispatch}
                 state={state as StateInterface}
-                />} 
-              />
+              />} 
+            />
             <Route path='products/:title' element={
               <ProductDetail 
                 dispatch={dispatch} 
                 state={state as StateInterface}
-                />} 
-              />
+              />} 
+            />
             <Route path='/shopping-cart' element={
-                <Cart state={state as StateInterface}                />
-              }/>
+                <Cart 
+                  state={state as StateInterface}
+                  dispatch={dispatch} 
+                />
+            }/>
           </Routes>
         </main>
       </div>
