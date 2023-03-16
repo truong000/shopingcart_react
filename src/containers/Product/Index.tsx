@@ -11,9 +11,7 @@ interface ProductProps {
     category: string;
     image: string;
     price: number;
-    rate: number;
     quantity: number;
-    dispatch: React.Dispatch<ActionInterface>;
     added?: boolean
 }
 
@@ -23,31 +21,30 @@ const Product: React.FC<ProductProps> = ({
     category,
     image,
     price,
-    rate,
     quantity,
-    dispatch,
     added
 }): JSX.Element => {
     const navigate: NavigateFunction = useNavigate()
     const handleClick = () => {
-        dispatch({
-            type: "MOVING",
-            payload: { current: `/products/${name}`, history: window.location.pathname }
-        })
+
         setTimeout(() => {
             window.scrollTo(0, 0)
         }, 0);
-        navigate(`/products/${name}`)
+        navigate(`/products/${id}`)
     }
     return (
 
         <div className="Product">
-            <div className="Product__thumbnail" onClick={handleClick}>
+            <div className="Product__thumbnail" 
+            onClick={handleClick}
+            >
                 <img className="Product__image" src={image} alt={name} />
             </div>
 
             <div className="Product__body">
-                <h2 className="Product__title" onClick={handleClick}>
+                <h2 className="Product__title" 
+                onClick={handleClick}
+                >
                     {name}
                 </h2>
                 <span>${price}</span>
@@ -58,11 +55,11 @@ const Product: React.FC<ProductProps> = ({
                 <div className="Rating">
                     <img className="Product__star" src="/assets/star.jpg" alt="" />
                 </div>
-                <ButtonATC
+                {/* <ButtonATC
                     ProductId={id}
-                    dispatch={dispatch}
+                    // dispatch={dispatch}
                     added={added}
-                />
+                /> */}
             </div>
         </div>
 

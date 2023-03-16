@@ -1,18 +1,20 @@
 import { Fragment} from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { Product } from "../../containers/Product"
 import { ActionInterface, PageProps} from "../../globalTypes"
+import { RootState } from "../../redux/store"
 
 
-const Home: React.FC<PageProps> = ({state, dispatch, ctx}): JSX.Element => {
-
+const Home: React.FC = (): JSX.Element => {
+    const products = useSelector((state: RootState) => state.product.products)
     return (
         <Fragment>
             <section className='Home'>
                 <section className='Home__items'>
                     {
-                        state.filteredItems.length ? (
+                        products.length ? (
                             <Fragment>
-                                {state.filteredItems.map(product => (
+                                {products.map(product => (
                                     <Product 
                                         key={product.id}
                                         id={product.id}
@@ -20,10 +22,7 @@ const Home: React.FC<PageProps> = ({state, dispatch, ctx}): JSX.Element => {
                                         category={product.category}
                                         price={product.price}
                                         image={product.image}
-                                        rate={product.rating.rate}
                                         quantity={product.quantity}
-                                        added={product.added as boolean}
-                                        dispatch={dispatch as React.Dispatch<ActionInterface>} 
                                     />
                                 ))}
                             </Fragment>
@@ -38,3 +37,4 @@ const Home: React.FC<PageProps> = ({state, dispatch, ctx}): JSX.Element => {
 }
 
 export { Home }
+
